@@ -1,4 +1,6 @@
 import express from "express";
+import path from "path";
+import { fileURLToPath } from "url";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
@@ -30,7 +32,18 @@ export function createApp() {
   app.use("/api/dashboard", dashboardRoutes);
   app.use("/api/reports", reportRoutes);
 
-  app.use(notFound);
+  app.use("/api", notFound);
+
+  if (env.nodeEnv === "production") {
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+    
+    app.use(express.static(path.join(__dirname, "../../client/dist")));
+    app.get("*", (req, res) => {
+      res.sendFile(path.join(__dirname, "../../client/dist/index.html"));
+    });
+  }
+
   app.use(errorHandler);
   return app;
 }

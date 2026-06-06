@@ -11,7 +11,8 @@ export default function Login() {
   const [showReset, setShowReset] = useState(false);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
-  if (user) return <Navigate to={user.role === "admin" ? "/admin" : "/employee"} />;
+
+  if (user) return <Navigate to={user.forcePasswordChange ? "/change-password" : (user.role === "admin" ? "/admin" : "/employee")} />;
 
   async function submit(event) {
     event.preventDefault();
@@ -19,7 +20,7 @@ export default function Login() {
     setMessage("");
     try {
       const next = await login(form.email, form.password);
-      navigate(next.role === "admin" ? "/admin" : "/employee");
+      navigate(next.forcePasswordChange ? "/change-password" : (next.role === "admin" ? "/admin" : "/employee"));
     } catch (err) {
       setError(err.message);
     }
