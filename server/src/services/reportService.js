@@ -15,8 +15,8 @@ function publicUsers(users) {
 async function getSettings() {
   const settings = await settingsRepo.findById("default");
   return {
-    workdayStart: "09:30",
-    lateAfterMinutes: 15,
+    workdayStart: "10:00",
+    lateAfterMinutes: 30,
     ...(settings || {})
   };
 }

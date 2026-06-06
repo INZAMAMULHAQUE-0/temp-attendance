@@ -4,9 +4,9 @@ const defaultSettings = {
   id: "default",
   companyName: "Logstios Software",
   timezone: "Asia/Kolkata",
-  workdayStart: "09:30",
+  workdayStart: "10:00",
   expectedDailyHours: 8,
-  lateAfterMinutes: 15
+  lateAfterMinutes: 30
 };
 
 export async function seedIfNeeded() {
