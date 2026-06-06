@@ -27,7 +27,21 @@ export default function AdminDashboard() {
   return (
     <div className="space-y-6">
       <div><h2 className="text-2xl font-bold">Admin Dashboard</h2><p className="text-sm text-slate-500">Live attendance, team capacity, and productivity signals.</p></div>
-      <div className="grid gap-4 md:grid-cols-4"><Stat label="Present Today" value={cards.presentToday} /><Stat label="Absent Today" value={cards.absentToday} /><Stat label="Late Today" value={cards.lateToday} /><Stat label="Active Employees" value={cards.activeEmployees} /><Stat label="On Leave" value={cards.employeesOnLeave} /><Stat label="Hours Today" value={cards.totalHoursLoggedToday} /><Stat label="Story Points" value={cards.storyPointsCompletedToday} /></div>
+      <div className="grid gap-4 md:grid-cols-4">
+        <Link to="/admin/reports" className="block hover:opacity-80 transition-opacity cursor-pointer">
+          <Stat label="Present Today" value={cards.presentToday} />
+        </Link>
+        <Link to="/admin/reports" className="block hover:opacity-80 transition-opacity cursor-pointer">
+          <Stat label="Absent Today" value={cards.absentToday} />
+        </Link>
+        <Link to="/admin/reports" className="block hover:opacity-80 transition-opacity cursor-pointer">
+          <Stat label="Late Today" value={cards.lateToday} />
+        </Link>
+        <Stat label="Active Employees" value={cards.activeEmployees} />
+        <Stat label="On Leave" value={cards.employeesOnLeave} />
+        <Stat label="Hours Today" value={cards.totalHoursLoggedToday} />
+        <Stat label="Story Points" value={cards.storyPointsCompletedToday} />
+      </div>
       <div className="grid gap-4 lg:grid-cols-2">
         <Chart title="Weekly Attendance"><BarChart data={data.analytics.weeklyAttendance}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="date" /><YAxis /><Tooltip /><Bar dataKey="present" fill="#0f766e" /></BarChart></Chart>
         <Chart title="Story Point Trend"><AreaChart data={data.analytics.storyPointTrend}><XAxis dataKey="date" /><YAxis /><Tooltip /><Area dataKey="points" fill="#e85d4f" stroke="#e85d4f" /></AreaChart></Chart>
