@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Legend, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { api } from "../api/client.js";
 import { Alert, Empty, Loading, Panel, Stat } from "../components/UI.jsx";
@@ -54,7 +55,9 @@ export default function AdminDashboard() {
                 {data.storyPoints.map((row) => (
                   <tr key={row.employee.id} className="border-t border-slate-100 align-top dark:border-slate-800">
                     <td className="py-3">
-                      <p className="font-semibold text-ink dark:text-white">{row.employee.name}</p>
+                      <Link to={`/admin/reports/employee/${row.employee.id}`} className="font-semibold text-teal hover:underline dark:text-teal">
+                        {row.employee.name}
+                      </Link>
                       <p className="text-xs text-slate-500">{row.employee.email}</p>
                     </td>
                     <td className="py-3">{row.employee.title}</td>

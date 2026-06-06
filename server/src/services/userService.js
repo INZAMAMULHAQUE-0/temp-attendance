@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs";
-import { ROLES } from "../../../shared/constants.js";
+import { ROLES } from "../constants.js";
 import { usersRepo } from "../repositories/repository.js";
 import { ApiError } from "../utils/errors.js";
 

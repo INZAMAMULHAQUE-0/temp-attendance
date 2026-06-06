@@ -1,5 +1,5 @@
 import express from "express";
-import { ACTIVITY_TYPES } from "../../../shared/constants.js";
+import { ACTIVITY_TYPES } from "../../../client/src/constants.js";
 import { requireAuth } from "../middleware/auth.js";
 import { activitiesFor, addActivity, updateActivity } from "../services/attendanceService.js";
 import { asyncHandler } from "../utils/errors.js";

@@ -1,5 +1,5 @@
 import express from "express";
-import { LEAVE_TYPES } from "../../../shared/constants.js";
+import { LEAVE_TYPES } from "../../../client/src/constants.js";
 import { requireAuth, requireRole } from "../middleware/auth.js";
 import { applyLeave, decideLeave, leavesFor } from "../services/attendanceService.js";
 import { asyncHandler, ApiError } from "../utils/errors.js";

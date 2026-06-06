@@ -1,4 +1,4 @@
-import { ATTENDANCE_STATUS } from "../../../shared/constants.js";
+import { ATTENDANCE_STATUS } from "../constants.js";
 import { activitiesRepo, attendanceRepo, leavesRepo, usersRepo } from "../repositories/repository.js";
 import { todayKey, minutesBetween } from "../utils/date.js";
 import { ApiError } from "../utils/errors.js";
@@ -60,9 +60,15 @@ export async function checkOut(userId, notes = "") {
 
 export async function attendanceHistory(user, query) {
   const all = await attendanceRepo.all();
-  if (user.role !== "admin") return all.filter((item) => item.userId === user.id);
-  if (query.userId) return all.filter((item) => item.userId === query.userId);
-  return all;
+  let filtered = all;
+  if (user.role !== "admin") filtered = filtered.filter((item) => item.userId === user.id);
+  else if (query.userId) filtered = filtered.filter((item) => item.userId === query.userId);
+
+  if (query.date) filtered = filtered.filter((item) => item.date === query.date);
+  if (query.fromDate) filtered = filtered.filter((item) => item.date >= query.fromDate);
+  if (query.toDate) filtered = filtered.filter((item) => item.date <= query.toDate);
+  
+  return filtered;
 }
 
 export async function addActivity(user, body) {
@@ -99,8 +105,16 @@ export async function updateActivity(user, id, body) {
 
 export async function activitiesFor(user, query = {}) {
   const all = await activitiesRepo.all();
-  if (user.role !== "admin") return all.filter((item) => item.userId === user.id);
-  return query.userId ? all.filter((item) => item.userId === query.userId) : all;
+  let filtered = all;
+  
+  if (user.role !== "admin") filtered = filtered.filter((item) => item.userId === user.id);
+  else if (query.userId) filtered = filtered.filter((item) => item.userId === query.userId);
+
+  if (query.date) filtered = filtered.filter((item) => item.date === query.date);
+  if (query.fromDate) filtered = filtered.filter((item) => item.date >= query.fromDate);
+  if (query.toDate) filtered = filtered.filter((item) => item.date <= query.toDate);
+
+  return filtered;
 }
 
 export async function applyLeave(user, body) {

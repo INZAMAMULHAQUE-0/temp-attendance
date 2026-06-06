@@ -6,6 +6,7 @@ import ChangePassword from "./pages/ChangePassword.jsx";
 import EmployeeDashboard from "./pages/EmployeeDashboard.jsx";
 import Employees from "./pages/Employees.jsx";
 import History from "./pages/History.jsx";
+import EmployeeReport from "./pages/EmployeeReport.jsx";
 import Leaves from "./pages/Leaves.jsx";
 import Login from "./pages/Login.jsx";
 import Reports from "./pages/Reports.jsx";
@@ -36,6 +37,7 @@ export default function App() {
         <Route path="/admin" element={<RequireAuth role="admin"><AdminDashboard /></RequireAuth>} />
         <Route path="/admin/employees" element={<RequireAuth role="admin"><Employees /></RequireAuth>} />
         <Route path="/admin/reports" element={<RequireAuth role="admin"><Reports /></RequireAuth>} />
+        <Route path="/admin/reports/employee/:id" element={<RequireAuth role="admin"><EmployeeReport /></RequireAuth>} />
         <Route path="/employee" element={<RequireAuth role="employee"><EmployeeDashboard /></RequireAuth>} />
         <Route path="/employee/history" element={<RequireAuth role="employee"><History /></RequireAuth>} />
         <Route path="/leaves" element={<Leaves />} />
